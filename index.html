@@ -12,8 +12,8 @@
 		let canvas_h = 450;
 
 			let config = {
-				width: 800,
-				height: 450,
+				width: canvas_w,
+				height: canvas_h,
 				scene: {
 					preload: precarga,
 					create: crea,
@@ -25,7 +25,8 @@
 			
 			let rect;
 			let cursors;
-			
+			let huevera_b, huevera_m, huevera_d;
+
 			function precarga ()
 			{
 				this.load.image('huevera', 'huevera.png');
@@ -36,7 +37,7 @@
 			{
 				rect = this.add.rectangle(400, 225, 32, 32, 0xffffff);  
 				cursors = this.input.keyboard.createCursorKeys();
-				this.add.image(400, 160, 'huevera');
+				huevera_b = this.add.image(400, 160, 'huevera');
 			}
 			
 			function actualiza ()
