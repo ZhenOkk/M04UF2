@@ -28,6 +28,7 @@
 			
 			function precarga ()
 			{
+				this.load.image('huevera', 'huevera.png');
 				
 			}
 			
@@ -35,6 +36,7 @@
 			{
 				rect = this.add.rectangle(400, 225, 32, 32, 0xffffff);  
 				cursors = this.input.keyboard.createCursorKeys();
+				this.add.image(400, 160, 'huevera');
 			}
 			
 			function actualiza ()
