@@ -45,54 +45,74 @@
 					//Añadir el fondo:
 				granja = this.add.image(400, 225, 'granja').setDisplaySize(canvas_w, canvas_h);
 				
-					//Crear la paja:
-				paja_b = this.add.image(600, 100, 'paja');
-				paja_b = setScale(1);
-				
-				paja_m = this.add.image(600, 300, 'paja');
-				paja_m = setScale(1);
-				
-				paja_d = this.add.image(600, 200, 'paja');
-				paja_d = setScale(1);				
-				
+					//Crear la paja:				
+				paja_b = this.add.image(200, 100, 'paja');
+				paja_b.setScale(.1);
+				paja_m = this.add.image(200, 200, 'paja');
+				paja_m.setScale(.1);
+				paja_d = this.add.image(200, 300, 'paja');
+				paja_d.setScale(.1);
+
 					//Crear hueveras:
 				huevera_b = this.add.image(200, 100, 'huevera');
-				huevera_b.setScale(.2);
-				
+				huevera_b.setScale(.1);
+
 				huevera_m = this.add.image(200, 300, 'huevera');
-				huevera_m.setScale(.2);
+				huevera_m.setScale(.1);
 				huevera_m.setTint (Phaser.Display.Color.GetColor (192, 128, 16));
 				
 				huevera_d = this.add.image(200, 200, 'huevera');
-				huevera_d.setScale(.2);
+				huevera_d.setScale(.1);
 				huevera_d.setTint (Phaser.Display.Color.GetColor (0, 255, 0));
 
 					//Crear huevos:
 				huevo_b = this.add.image(600, 100, 'huevo');
 				huevo_b.setScale(.1);
-				huevo_b.setInteractive();
-				huevo_b.on('pointerdown', function () {
-					console.log("Huevo Blanco Clickado");
-				});
 
 				huevo_m = this.add.image(600, 300, 'huevo');
 				huevo_m.setScale(.1);
-				huevo_m.setTint (Phaser.Display.Color.GetColor (192, 168, 16));
-				huevo_m.setInteractive();
-				huevo_m.on('pointerdown', function () {
-					console.log("Huevo Amarillo Clickado");
-				});				
+				huevo_m.setTint (Phaser.Display.Color.GetColor (192, 168, 16));				
 
 				huevo_d = this.add.image(600, 200, 'huevo');
 				huevo_d.setScale(.1);
 				huevo_d.setTint (Phaser.Display.Color.GetColor (0, 255, 0));
-				huevo_d.setInteractive();
-				huevo_d.on('pointerdown', function () {
-					console.log("Huevo Verde Clickado");
+
+					//Interacciones de Huevos:
+				huevo_b.setInteractive({ draggable: true });
+				huevo_b.on('pointerdown', function () {
+				  console.log("Huevo Blanco Clickado");
+					this.setScale(.12);
 				});
+
+				huevo_m.setInteractive({ draggable: true });
+				huevo_m.setInteractive();
+        huevo_m.on('pointerdown', function () {
+          console.log("Huevo Amarillo Clickado");
+					this.setScale(.12);
+        });
 				
+				huevo_d.setInteractive({ draggable: true });
+				huevo_d.setInteractive();
+        huevo_d.on('pointerdown', function () {
+          console.log("Huevo Verde Clickado");
+					this.setScale(.12);
+        });
+
+				this.input.on('drag', function (pointer, object, x, y) {
+          object.x = x;
+          object.y = y;
+
+					if (Phaser.Geom.Intersects.RectangleToRectangle(huevera_m.getBounds(), object.getBounds())){
+						console.log("Huevo dentro de Huevera!!!");
+	        };
+        });
+
+				this.input.on('dragend', function (pointer, object, x, y) {
+          object.setScale(.1);
+        });
+
 			}
-			
+
 			function actualiza ()
 			{
 				if (cursors.left.isDown)
