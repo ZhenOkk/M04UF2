@@ -110,9 +110,23 @@
 				this.input.on('dragend', function (pointer, object, x, y) {
           object.setScale(.1);
         });
-
+		
+		this.time.addEvent({
+			delay: 5000, // Generar un huevo cada segundo
+			callback: generarHuevo,
+			callbackScope: this,
+			loop: true
+		});
 			}
-
+			
+			function generarHuevo() {
+				let x = Phaser.Math.Between(50, canvas_w - 50); // Posición aleatoria en la parte superior
+				let huevo = this.physics.add.image(x, 0, 'huevo');
+				huevo.setScale(0.1);
+				huevo.setVelocityY(100); // Velocidad hacia abajo
+				huevos.add(huevo);
+			}
+			
 			function actualiza ()
 			{
 				if (cursors.left.isDown)
