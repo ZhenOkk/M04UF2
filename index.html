@@ -80,51 +80,36 @@
 					//Interacciones de Huevos:
 				huevo_b.setInteractive({ draggable: true });
 				huevo_b.on('pointerdown', function () {
-				  console.log("Huevo Blanco Clickado");
+					console.log("Huevo Blanco Clickado");
 					this.setScale(.12);
 				});
 
 				huevo_m.setInteractive({ draggable: true });
 				huevo_m.setInteractive();
-        huevo_m.on('pointerdown', function () {
-          console.log("Huevo Amarillo Clickado");
+				huevo_m.on('pointerdown', function () {
+					console.log("Huevo Amarillo Clickado");
 					this.setScale(.12);
-        });
+				});
 				
 				huevo_d.setInteractive({ draggable: true });
 				huevo_d.setInteractive();
-        huevo_d.on('pointerdown', function () {
-          console.log("Huevo Verde Clickado");
+				huevo_d.on('pointerdown', function () {
+				console.log("Huevo Verde Clickado");
 					this.setScale(.12);
-        });
+				});
 
 				this.input.on('drag', function (pointer, object, x, y) {
-          object.x = x;
-          object.y = y;
+					object.x = x;
+					object.y = y;
 
 					if (Phaser.Geom.Intersects.RectangleToRectangle(huevera_m.getBounds(), object.getBounds())){
 						console.log("Huevo dentro de Huevera!!!");
-	        };
-        });
+					};
+				});
 
 				this.input.on('dragend', function (pointer, object, x, y) {
-          object.setScale(.1);
-        });
-		
-		this.time.addEvent({
-			delay: 5000, // Generar un huevo cada segundo
-			callback: generarHuevo,
-			callbackScope: this,
-			loop: true
-		});
-			}
-			
-			function generarHuevo() {
-				let x = Phaser.Math.Between(50, canvas_w - 50); // Posición aleatoria en la parte superior
-				let huevo = this.physics.add.image(x, 0, 'huevo');
-				huevo.setScale(0.1);
-				huevo.setVelocityY(100); // Velocidad hacia abajo
-				huevos.add(huevo);
+					object.setScale(.1);
+				});
 			}
 			
 			function actualiza ()
